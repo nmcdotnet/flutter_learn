@@ -4,10 +4,6 @@ class StartScreen extends StatelessWidget {
   const StartScreen(this.startQuiz, {super.key});
   final VoidCallback startQuiz;
 
-  // @override
-  // Widget build(BuildContext context) {
-  //   return const Center(child: Text("Start Screen"));
-  // }
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -19,13 +15,6 @@ class StartScreen extends StatelessWidget {
             width: 300,
             color: const Color.fromARGB(150, 255, 255, 255),
           ),
-          // Opacity(
-          //   opacity: 0.5,
-          //   child: Image.asset(
-          //     'assets/images/quiz-logo.png',
-          //     width: 300,
-          //   ),
-          // ),
           const SizedBox(height: 80),
           const Text("Learn flutter the fun way",
               style: TextStyle(

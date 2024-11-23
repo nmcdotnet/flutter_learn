@@ -12,11 +12,11 @@ class Quiz extends StatefulWidget {
 class _QuizState extends State<Quiz> {
   Widget? activeScreen;
 
-// Hàm init state sẽ chạy khi widget được tạo ra để khởi tạo giá trị cho các thuộc tính như activeScreen bằng cách gán giá trị cho nó là StartScreen(switchScreen)
   @override
   void initState() {
     super.initState();
-    activeScreen = StartScreen(switchScreen);
+    activeScreen = StartScreen(
+        switchScreen); // Stateful widget chưa được tạo ra nên không thể gọi hàm switchScreen bên ngoài hàm initState
   }
 
   void switchScreen() {
@@ -28,11 +28,9 @@ class _QuizState extends State<Quiz> {
   @override
   Widget build(BuildContext context) {
     Widget screenWidget = StartScreen(switchScreen);
-    print(screenWidget.toString());
+
     if (activeScreen is QuestionScreen) {
       screenWidget = const QuestionScreen();
-    } else {
-      print("Sao ky vay");
     }
 
     return MaterialApp(
