@@ -5,7 +5,9 @@ import 'package:google_fonts/google_fonts.dart';
 //import 'package:google_fonts/google_fonts.dart';
 
 class QuestionScreen extends StatefulWidget {
-  const QuestionScreen({super.key});
+  const QuestionScreen({super.key, required this.onSelectedAnswer});
+
+  final void Function(String answer) onSelectedAnswer;
 
   @override
   State<QuestionScreen> createState() => _QuestionScreenState();
@@ -14,7 +16,8 @@ class QuestionScreen extends StatefulWidget {
 class _QuestionScreenState extends State<QuestionScreen> {
   var currentQuestionIndex = 0;
 
-  void aswerQuestion() {
+  void answerQuestion(String selectedAnswer) {
+    widget.onSelectedAnswer(selectedAnswer);
     // thông báo cho widget rằng nó cần phải rebuild vì đã thay đổi dữ liệu, cụ thể là currentQuestionIndex
     setState(() {
       currentQuestionIndex++;
@@ -37,19 +40,23 @@ class _QuestionScreenState extends State<QuestionScreen> {
           children: [
             Text(
               currentQuestion.text,
-              // style: GoogleFonts.lato(
-              //   textStyle: const TextStyle(
-              //     fontSize: 30,
-              //     color: Colors.white,
-              //   ),
-              // ),
+              style: GoogleFonts.lato(
+                textStyle: const TextStyle(
+                  fontSize: 30,
+                  color: Colors.white,
+                ),
+              ),
             ),
             const SizedBox(height: 20),
 
             /// Get elements from the array, instead of having to write each line
             /// use  spread (...)  to get all the elements from the array
             ...currentQuestion.getShuffledAnswers().map((answer) {
-              return AnswerButton(answerText: answer, onTap: aswerQuestion);
+              return AnswerButton(
+                  answerText: answer,
+                  onTap: () {
+                    answerQuestion(answer);
+                  });
             }),
           ],
         ),
